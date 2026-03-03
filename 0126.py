@@ -26,12 +26,13 @@ POOL = PooledDB(
     blocking=True,#无可用链接时是否阻塞等待，是Ture，否False，不等待报错
     setsession=[],#开始会话前执行的命令列表
     ping=0,
-    **DB_CONFIG
+    **DB_CONFIG,
+    cursorclass=pymysql.cursors.DictCursor#指定连接的游标类型，这里为字典类型
 )
 
 #连接数据库函数，返回一个连接对象
 def conn():
-    return POOL.connection(**DB_CONFIG,cursorclass=pymysql.cursors.DictCursor)#注意，connect表示去连接，是一个动词，所以用在这里,指定为字典游标
+    return POOL.connection()#注意，connect表示去连接，是一个动词，所以用在这里,指定为字典游标
 app = Flask(__name__)
 
 @app.route("/login",methods = ['POST'])#绑定路由
@@ -52,6 +53,20 @@ def login():#路由函数，实现登录功能
         return jsonify({'code':1,'massage':'登录成功'}),200
     else:
         return jsonify({'code':3,'massage':'用户名或密码输入错误，请重试'}),401
+@app.route("/register",methods = ['POST'])#绑定路由
+def register():
+    data = request.get_json()#获取请求数据
+    username = data.get('name')#获取用户名
+    password = data.get('password')#获取密码
+    print(username,password)
+    if not username or not password:#判断是否输入用户名和密码
+        return jsonify({'code':0,'massage':'请输入用户名或者密码'}),201
+    with conn() as connection:
+        cur = connection.cursor()
+        cur.execute("INSERT INTO users(name,password) VALUES(%s,%s)",(username,password))
+        connection.commit()
+        print(f"注册成功，用户名：{username}")
+        return jsonify({"code":4,"massage":"注册成功"}),200
 
 
 if __name__ == '__main__':
