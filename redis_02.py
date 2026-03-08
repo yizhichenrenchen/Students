@@ -2,7 +2,13 @@ from flask import Flask, jsonify, request
 import redis
 import json
 import uuid
+import logging#日志
+R_conn = redis.Redis(host='localhost', port=6379, db=0)
 
+#全局一次连接，避免重复链接
+#日志专业化
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 app = Flask(__name__)
 
@@ -19,10 +25,10 @@ def task():
     tid = str(uuid.uuid4())
     #将任务及id先放入字典
     task_dict = {"tid": tid, "data": data}
-    print(task_dict)
+    logging.info(f"接收到新任务，任务ID: {tid}, 数据: {data}")
 
     #连接redis
-    R_conn = redis.Redis(host='localhost', port=6379, db=0)
+
 
     #将任务字典转化为json字符串，再存入redis队列
     R_conn.lpush("task_queue", json.dumps(task_dict))
@@ -39,9 +45,9 @@ def result():
         return jsonify({"code": 400, "msg": "参数错误"}), 400
 
     #连接redis，准备查询结果
-    R_conn = redis.Redis(host='localhost', port=6379, db=0)
+
     result = R_conn.hget("result_dict",tid)#从结果字典中取出结果
-    print(result,type(result))
+    logging.info(f"查询任务结果，任务ID: {tid}")
     if not result:
         return jsonify({"code": 404, "msg": "任务执行中，请稍候再试"}), 404
     #返回结果之前可以考虑将结果从bytes类型转化为字符串类型，并且将任务结果移除完成队列
