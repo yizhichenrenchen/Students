@@ -33,6 +33,57 @@
  <p>童话镇视频</p><br>
  <video src="./vedio/童话镇.mp4" controls></video>
  <!-- video属性中controls是控制面板，muted静音播放，autoplay自动播放，但是一般浏览器自动禁止，可以配合静音播放属性完成自动播放，loop循环播放 -->
+<!-- 列表标签，无序列表ul,ul标签嵌套li标签 -->
+ <ul>
+   <li>1. 列表项1</li>
+   <li>2. 列表项2</li>
+   <li>3. 列表项3</li>
+ </ul>
+ <!-- 有序列表ol,ol标签嵌套li标签 -->
+ <ol>
+   <li>1. 有序列表项1</li>
+   <li>2. 有序列表项2</li>
+   <li>3. 有序列表项3</li>
+ </ol>
+ <!-- 定义列表dl嵌套dt和dd标签，dt定义标题，dd定义描述 -->
+ <dl>
+   <dt>标题1</dt>
+   <dd>描述1</dd>
+   <dt>标题2</dt>
+   <dd>描述2</dd>
+ </dl>
+ <!-- 表格标签，table嵌套tr，tr嵌套td，th标签，tr表示行，th表示表头，td表示单元格，以及结构标签thead表头，tbody内容，tfoot总结 -->
+<!-- 表格也可以进行合并单元格，跨行合并属性rowspan，跨列合并属性colspan，原则保留最左最上单元格，添加属性，删除其他单元格，不能跨结构标签合并 -->
+  <table border="1">
+    <thead>
+        <tr>
+        <th>姓名</th>
+        <th>语文</th>
+        <th>数学</th>
+        <th>总分</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>张三</td>
+            <td>99</td>
+            <td rowspan="2">100</td>
+            <td>199</td>
+        </tr>
 
+        <tr>
+            <td>李四</td>
+            <td>98</td>
+
+            <td>198</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>总结</td>
+            <td colspan="3">全市第一</td>
+
+        </tr>
+    </tfoot>
 </body>
 </html>

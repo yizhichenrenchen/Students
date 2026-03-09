@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册信息</title>
+</head>
+<body>
+    <h1>注册信息</h1>
+    <form action="">
+        <div>
+            <h4>个人信息</h4>
+            姓名:<input type="text" placeholder="请输入姓名"><br>
+            密码:<input type="password" placeholder="请输入密码"><br>
+            确认密码:<input type="password" placeholder="请再次输入密码"><br>
+            性别:
+            <input type="radio" name="gender" id="man" checked>
+            <label for="man">男</label>
+            <input type="radio" name="gender" id="men">
+            <label for="men">女</label><br>
+            居住城市:
+            <select >
+                <option selected>北京</option>
+                <option>上海</option>
+
+            </select>
+        </div>
+        <div>
+            <h4>教育经历</h4>
+            最高学历:
+            <select>
+                <option>小学</option>
+                <option>初中</option>
+                <option>高中</option>
+                <option>大专</option>
+                <option selected>本科</option>
+            </select><br>
+            学校名称:<input type="text"><br>
+            所学专业:<input type="text"><br>
+            <label>在校时间:</label>
+            <select>
+                <option>2015</option>
+                <option>2016</option>
+                <option>2017</option>
+                <option>2018</option>
+                <option>2019</option>
+            </select>--
+            <select>
+
+                <option>2016</option>
+                <option>2017</option>
+                <option>2018</option>
+                <option>2019</option>
+                <option>2020</option>
+            </select>
+        </div>
+        <div>
+            <h4>工作经历</h4>
+            公司名称:<input type="text"><br><br>
+            工作描述:<br>
+            <textarea>
+                请输入主要工作内容
+            </textarea><br>
+        </div>
+        <div>
+            <input type="checkbox">已阅读并同意以下协议<br>
+            <ul>
+                <li>
+                    <a href="./用户服务协议.docx">《用户服务协议》</a>
+                </li>
+                <li>
+                    <a href="./隐私政策.docx">《隐私政策》</a>
+                </li>
+            </ul>
+
+        </div>
+        <button type="reset">重新填写</button>
+        <button type="submit">免费注册</button>
+    </form>
+</body>
+</html>
